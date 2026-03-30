@@ -1,5 +1,5 @@
 /*
-  / NAME: Henry Ariaga, Alberto Molina, Peter Uzuriaga  /
+  / NAME: Henry Arinaga, Alberto Molina, Peter Uzuriaga  /
   / ASGT: CHECKPOINT 1                                  /
   / ORGN: CSUB - CMPS 3500                              /
   / FILE: main.cpp                                      /
@@ -14,9 +14,15 @@
 
 std::string read_file(const std::string& path);
 
-int main() {
+int main(int argc, char* argv[]) {
+    if (argc != 2) {
+        std::cout << "Usage: ./<program_name> <file_name>\n";
+        return 0;
+    }
+
     // Example of using the file loader, tokenizer, and parser together
-    std::string source_code = read_file("../tests/public/addon_03.scm");
+    std::string file_location = std::string("../tests/public/") + argv[1];
+    std::string source_code = read_file(file_location);
 
     std::vector<std::string> token_list = tokenize(source_code);
     std::vector<std::string> parsed_expression = parseTokens(token_list);

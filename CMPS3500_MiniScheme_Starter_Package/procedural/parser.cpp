@@ -1,5 +1,5 @@
 /*
-  / NAME: Henry Ariaga, Alberto Molina, Peter Uzuriaga  /
+  / NAME: Henry Arinaga, Alberto Molina, Peter Uzuriaga  /
   / ASGT: CHECKPOINT 1                                  /
   / ORGN: CSUB - CMPS 3500                              /
   / FILE: parser.cpp                                    /
