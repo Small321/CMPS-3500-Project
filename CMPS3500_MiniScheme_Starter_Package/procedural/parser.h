@@ -14,4 +14,7 @@
 
 std::vector<std::string> parseTokens(const std::vector<std::string>& input_tokens);
 
+// Split the tokens into separate expressions
+std::vector<std::vector<std::string> > split_expressions(const std::vector<std::string>& tokens);
+
 #endif
