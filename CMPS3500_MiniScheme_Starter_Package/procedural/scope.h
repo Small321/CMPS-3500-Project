@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-struct Binding
+struct ScopeEntry
 {
     std::string name;
     std::string value;
@@ -12,7 +12,7 @@ struct Binding
 
 struct Scope
 {
-    std::vector<Binding> bindings;
+    std::vector<ScopeEntry> scope_entries;
     Scope *parent;
 };
 

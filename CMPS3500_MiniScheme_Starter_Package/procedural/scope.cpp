@@ -27,10 +27,10 @@ void addBinding(Scope *scope, const std::string &name, const std::string &value)
         return;
     }
 
-    Binding b;
+    ScopeEntry b;
     b.name = name;
     b.value = value;
-    scope->bindings.push_back(b);
+    scope->scope_entries.push_back(b);
 }
 
 std::string lookupBinding(Scope *scope, const std::string &name)
@@ -39,11 +39,11 @@ std::string lookupBinding(Scope *scope, const std::string &name)
 
     while (temp != nullptr)
     {
-        for (int i = 0; i < (int)temp->bindings.size(); i++)
+        for (int i = 0; i < (int)temp->scope_entries.size(); i++)
         {
-            if (temp->bindings[i].name == name)
+            if (temp->scope_entries[i].name == name)
             {
-                return temp->bindings[i].value;
+                return temp->scope_entries[i].value;
             }
         }
 
@@ -60,9 +60,9 @@ bool existsInCurrentScope(Scope *scope, const std::string &name)
         return false;
     }
 
-    for (int i = 0; i < (int)scope->bindings.size(); i++)
+    for (int i = 0; i < (int)scope->scope_entries.size(); i++)
     {
-        if (scope->bindings[i].name == name)
+        if (scope->scope_entries[i].name == name)
         {
             return true;
         }
