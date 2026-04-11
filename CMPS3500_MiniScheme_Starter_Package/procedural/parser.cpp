@@ -46,7 +46,7 @@ std::vector<std::string> parseTokens(const std::vector<std::string> &input_token
 }
 
 // Splits multiple expressions from token list
-std::vector<std::vector<std::string>> split_expressions(const std::vector<std::string> &tokens)
+std::vector<std::vector<std::string>> splitExpressions(const std::vector<std::string> &tokens)
 {
     std::vector<std::vector<std::string>> expressions;
     std::vector<std::string> current;

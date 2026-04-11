@@ -1,6 +1,6 @@
 /*
   / NAME: Walter Morales (provided file loader stub)    /
-  / NAME: Henry Arinaga, Alberto Molina, Peter Uzuriaga  /
+  / NAME: Henry Ariaga, Alberto Molina, Peter Uzuriaga  /
   / ASGT: CHECKPOINT 1                                  /
   / ORGN: CSUB - CMPS 3500                              /
   / FILE: file_loader_stub.cpp                          /

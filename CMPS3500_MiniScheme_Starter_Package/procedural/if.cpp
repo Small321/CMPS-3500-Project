@@ -1,25 +1,35 @@
+#include "if.h"
 #include <iostream>
-#include <vector>
-#include <string>
 
-std::string eval(const std::string& token); 
-
-void handle_if(const std::vector<std::string>& expr) {
-
-    if (expr.size() != 5) {
-        std::cerr << "Error: invalid if expression\n";
+void handleIf(const std::vector<std::string>& expr, Scope* scope)
+{
+    if (expr.size() != 4)
+    {
+        std::cout << "Error: invalid if expression\n";
         return;
     }
 
-    std::string condition = expr[2];
-    std::string true_branch = expr[3];
-    std::string false_branch = expr[4];
+    std::string condition = expr[1];
+    std::string true_branch = expr[2];
+    std::string false_branch = expr[3];
 
-    std::string result = eval(condition);
+    std::string cond_value;
 
-    if (result == "#t") {
-        std::cout << eval(true_branch) << "\n";
-    } else {
-        std::cout << eval(false_branch) << "\n";
+    if (condition == "#t" || condition == "#f")
+    {
+        cond_value = condition;
+    }
+    else
+    {
+        cond_value = lookupBinding(scope, condition);
+    }
+
+    if (cond_value == "#t")
+    {
+        std::cout << true_branch << "\n";
+    }
+    else
+    {
+        std::cout << false_branch << "\n";
     }
 }

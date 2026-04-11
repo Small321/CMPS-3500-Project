@@ -16,11 +16,11 @@ struct Scope
     Scope *parent;
 };
 
-Scope *enter_scope(Scope *current);
-Scope *exit_scope(Scope *current);
+Scope *enterScope(Scope *current);
+Scope *exitScope(Scope *current);
 
-void add_binding(Scope *scope, const std::string &name, const std::string &value);
-std::string lookup_binding(Scope *scope, const std::string &name);
-bool exists_in_current_scope(Scope *scope, const std::string &name);
+void addBinding(Scope *scope, const std::string &name, const std::string &value);
+std::string lookupBinding(Scope *scope, const std::string &name);
+bool existsInCurrentScope(Scope *scope, const std::string &name);
 
 #endif

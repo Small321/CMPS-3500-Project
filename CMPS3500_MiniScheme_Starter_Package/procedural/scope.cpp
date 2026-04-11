@@ -1,14 +1,14 @@
 #include "scope.h"
 #include <string>
 
-Scope *enter_scope(Scope *current)
+Scope *enterScope(Scope *current)
 {
     Scope *new_scope = new Scope;
     new_scope->parent = current;
     return new_scope;
 }
 
-Scope *exit_scope(Scope *current)
+Scope *exitScope(Scope *current)
 {
     if (current == nullptr)
     {
@@ -20,7 +20,7 @@ Scope *exit_scope(Scope *current)
     return parent_scope;
 }
 
-void add_binding(Scope *scope, const std::string &name, const std::string &value)
+void addBinding(Scope *scope, const std::string &name, const std::string &value)
 {
     if (scope == nullptr)
     {
@@ -33,7 +33,7 @@ void add_binding(Scope *scope, const std::string &name, const std::string &value
     scope->bindings.push_back(b);
 }
 
-std::string lookup_binding(Scope *scope, const std::string &name)
+std::string lookupBinding(Scope *scope, const std::string &name)
 {
     Scope *temp = scope;
 
@@ -50,10 +50,10 @@ std::string lookup_binding(Scope *scope, const std::string &name)
         temp = temp->parent;
     }
 
-    return "UNBOUND";
+    return "NOT FOUND";
 }
 
-bool exists_in_current_scope(Scope *scope, const std::string &name)
+bool existsInCurrentScope(Scope *scope, const std::string &name)
 {
     if (scope == nullptr)
     {
