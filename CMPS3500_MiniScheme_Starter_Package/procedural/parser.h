@@ -1,5 +1,5 @@
 /*
-  / NAME: Henry Ariaga, Alberto Molina, Peter Uzuriaga  /
+  / NAME: Henry Arinaga, Alberto Molina, Peter Uzuriaga  /
   / ASGT: CHECKPOINT 1                                  /
   / ORGN: CSUB - CMPS 3500                              /
   / FILE: parser.h                                      /
@@ -13,5 +13,8 @@
 #include <string>
 
 std::vector<std::string> parseTokens(const std::vector<std::string>& input_tokens);
+
+// Split the tokens into separate expressions
+std::vector<std::vector<std::string> > splitExpressions(const std::vector<std::string>& tokens);
 
 #endif
