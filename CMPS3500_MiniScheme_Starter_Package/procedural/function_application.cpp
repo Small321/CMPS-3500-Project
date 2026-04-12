@@ -6,6 +6,7 @@
   / DATE: 04/11/2026                                    /
 */
 #include "function_application.h"
+#include "evaluate.h"
 #include "scope.h"
 #include <iostream>
 #include <cctype>
@@ -23,6 +24,47 @@ static int resolveValue(const std::string& token, Scope* scope)
 
     return std::stoi(val);
 }
+
+static int resolveExpressionValue(
+    const std::vector<std::string>& expr,
+    int& i,
+    Scope* scope
+)
+{
+    if (expr[i] != "(")
+    {
+        int value = resolveValue(expr[i], scope);
+        i++;
+        return value;
+    }
+
+    std::vector<std::string> nested_expr;
+    int depth = 0;
+    // Extract the nested expression
+    while (i < (int)expr.size())
+    {
+        nested_expr.push_back(expr[i]);
+
+        if (expr[i] == "(")
+        {
+            depth++;
+        }
+        else if (expr[i] == ")")
+        {
+            depth--;
+
+            if (depth == 0)
+            {
+                i++;
+                break;
+            }
+        }
+
+        i++;
+    }
+
+    return std::stoi(evaluate(nested_expr, scope));
+}
 // Handles function application for built-in functions like +, -, *, /
 std::string handleFunctionApplication(
     const std::vector<std::string>& expr,
@@ -35,9 +77,9 @@ std::string handleFunctionApplication(
     {
         int result = 0;
 
-        for (int i = 1; i < (int)expr.size(); i++)
+        for (int i = 1; i < (int)expr.size();)
         {
-            result += resolveValue(expr[i], scope);
+            result += resolveExpressionValue(expr, i, scope);
         }
 
         std::cout << result << "\n";
@@ -51,11 +93,12 @@ std::string handleFunctionApplication(
             return "ERROR";
         }
 
-        int result = resolveValue(expr[1], scope);
+        int i = 1;
+        int result = resolveExpressionValue(expr, i, scope);
 
-        for (int i = 2; i < (int)expr.size(); i++)
+        for (; i < (int)expr.size();)
         {
-            result -= resolveValue(expr[i], scope);
+            result -= resolveExpressionValue(expr, i, scope);
         }
 
         std::cout << result << "\n";
@@ -66,9 +109,9 @@ std::string handleFunctionApplication(
     {
         int result = 1;
 
-        for (int i = 1; i < (int)expr.size(); i++)
+        for (int i = 1; i < (int)expr.size();)
         {
-            result *= resolveValue(expr[i], scope);
+            result *= resolveExpressionValue(expr, i, scope);
         }
 
         std::cout << result << "\n";
@@ -82,11 +125,12 @@ std::string handleFunctionApplication(
             return "ERROR";
         }
 
-        int result = resolveValue(expr[1], scope);
+        int i = 1;
+        int result = resolveExpressionValue(expr, i, scope);
 
-        for (int i = 2; i < (int)expr.size(); i++)
+        for (; i < (int)expr.size();)
         {
-            int divisor = resolveValue(expr[i], scope);
+            int divisor = resolveExpressionValue(expr, i, scope);
 
             if (divisor == 0)
             {

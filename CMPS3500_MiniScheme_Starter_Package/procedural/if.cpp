@@ -9,12 +9,12 @@
 #include <iostream>
 
 // Handles the built-in if expression
-void handleIf(const std::vector<std::string>& expr, Scope* scope)
+std::string handleIf(const std::vector<std::string>& expr, Scope* scope)
 {
     if (expr.size() != 4)
     {
         std::cout << "Error: invalid if expression\n";
-        return;
+        return "";
     }
 
     std::string condition = expr[1];
@@ -35,9 +35,11 @@ void handleIf(const std::vector<std::string>& expr, Scope* scope)
     if (cond_value == "#t")
     {
         std::cout << true_branch << "\n";
+        return true_branch;
     }
     else
     {
         std::cout << false_branch << "\n";
+        return false_branch;
     }
 }

@@ -12,6 +12,6 @@
 #include <string>
 #include "scope.h"
 // Forward declaration
-void evaluate(const std::vector<std::string>& expr, Scope* scope);
+std::string evaluate(const std::vector<std::string>& expr, Scope* scope);
 
 #endif
