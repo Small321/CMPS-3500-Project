@@ -8,23 +8,36 @@
 
 #include "tokenizer.h"
 #include "parser.h"
+#include "scope.h"
+#include "evaluate.h"
 #include <iostream>
-#include <vector>
 #include <string>
+
 
 std::string read_file(const std::string& path);
 
-int main() {
-    // Example of using the file loader, tokenizer, and parser together
-    std::string source_code = read_file("../tests/public/addon_03.scm");
-
-    std::vector<std::string> token_list = tokenize(source_code);
-    std::vector<std::string> parsed_expression = parseTokens(token_list);
-
-    std::cout << "Parsed result:\n";
-    for (const auto& t : parsed_expression) {
-        std::cout << t << "\n";
+int main(int argc, char *argv[])
+{
+    if (argc != 2)
+    {
+        std::cout << "Usage: ./test <file_name>\n";
+        return 1;
     }
 
+    std::string file_path = std::string("../tests/public/") + argv[1];
+
+    std::string source = read_file(file_path);
+
+    auto tokens = tokenize(source);
+    auto expressions = splitExpressions(tokens);
+
+    Scope* global = enterScope(NULL);
+
+    for (const auto& expr : expressions)
+    {
+        evaluate(expr, global);
+    }
+
+    exitScope(global);
     return 0;
 }
