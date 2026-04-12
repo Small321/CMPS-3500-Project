@@ -12,6 +12,7 @@
 #include <iostream>
 #include "function_application.h"
 #include "let.h"
+#include "lambda.h"
 
 // Evaluates a single expression
 std::string evaluate(const std::vector<std::string> &expr, Scope *scope)
@@ -43,10 +44,19 @@ std::string evaluate(const std::vector<std::string> &expr, Scope *scope)
     {
         return handleLet(parsed, scope);
     }
+    else if (op == "lambda")
+    {
+        return handleLambda(parsed, scope);
+    }
     else
     {
         if (parsed.size() == 1)
         {
+            if (parsed[0] == "#t" || parsed[0] == "#f")
+            {
+                return parsed[0];
+            }
+
             bool is_number = true;
             int start = 0;
 
@@ -70,7 +80,6 @@ std::string evaluate(const std::vector<std::string> &expr, Scope *scope)
 
             // variable lookup
             std::string value = lookupScopeEntry(scope, op);
-            std::cout << op << " = " << value << "\n";
             return value;
         }
         else
